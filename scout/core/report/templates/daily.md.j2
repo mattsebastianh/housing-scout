@@ -1,0 +1,51 @@
+# {{ app_name }} — {{ run.human_date }}
+
+{{ cities_label }} · {{ "{:,}".format(price_min).replace(",", ".") }}–{{ "{:,}".format(price_max).replace(",", ".") }} € · Top {{ top_n }} propiedades del día
+
+{{ run.new_total }} propiedades nuevas analizadas · {{ run.reported_total }} incluidas en este informe
+
+---
+{% for card in cards %}
+## {{ loop.index }}. {{ card.municipality }}{% if card.province %}, {{ card.province }}{% endif %} — {{ "{:,}".format(card.price).replace(",", ".") }} € — {{ "%.1f"|format(card.composite) }}/10
+
+- Superficie: {{ card.size_m2 or "—" }} m² ({{ "{:,}".format(card.price_psqm).replace(",", ".") }} €/m²)
+{% if card.plot_m2 -%}
+- Terreno: {{ "{:,}".format(card.plot_m2).replace(",", ".") }} m²
+{% endif -%}
+- Habitaciones: {{ card.bedrooms or "—" }} hab, {{ card.bathrooms or "—" }} baño{{ "s" if (card.bathrooms or 0) != 1 else "" }}
+{% if card.distance_km is not none -%}
+- Distancia al centro: {{ "%.0f"|format(card.distance_km) }} km{% if card.drive_min is not none %} ({{ card.drive_min }} min en coche){% endif %}
+{% endif -%}
+- Vista por 1ª vez: {{ card.first_seen }}
+- Fuente: {{ card.portal_label }}
+
+Puntuaciones:
+{% for dim in card.dim_rows -%}
+{% if dim.value != "No disponible" %}- {{ dim.label }}: {{ dim.value }}
+{% endif -%}
+{%- endfor %}
+{% if card.analyst_md %}
+Análisis IA:
+
+{{ card.analyst_md }}
+{% endif %}
+{%- if card.positives_md and card.positives_md != "- (sin destacados automáticos)" %}
+Puntos a favor:
+{{ card.positives_md }}
+{% endif %}
+Alertas:
+{{ card.risks_md }}
+
+Enlace: {{ card.url }}
+
+---
+{% endfor %}
+## Resumen del día
+
+- Listados obtenidos: {{ summary.fetched_total }}
+- Excluidos por filtro: {{ summary.excluded_total }}{% if summary.top_reason %} ({{ summary.top_reason }}){% endif %}
+- Deduplicaciones: {{ summary.dedup_overrides }}
+- Señal de mercado: {{ summary.market_signal }}
+- Alerta macro: {{ summary.macro_alert }}
+
+Generado {{ run.generated_at }} · run #{{ run.id }}

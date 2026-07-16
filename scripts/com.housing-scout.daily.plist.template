@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.housing-scout.daily</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>__PROJECT_ROOT__/.venv/bin/python</string>
+    <string>__PROJECT_ROOT__/run_daily.py</string>
+  </array>
+  <!-- Weekly: Tuesday (Weekday 2) at 00:00 CET / Europe/Madrid. launchd uses the
+       Mac's LOCAL clock, so this is set to 18:00 Monday (Weekday 1) local (UTC-5)
+       == 23:00 UTC Monday == 00:00 Tuesday CET (UTC+1).
+       In Madrid summer CEST (UTC+2) it lands at 01:00 Tuesday Madrid; bump Hour
+       to 17 (Monday local) if you want 00:00 year-round. -->
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key><integer>1</integer>
+    <key>Hour</key><integer>18</integer>
+    <key>Minute</key><integer>0</integer>
+  </dict>
+  <key>WorkingDirectory</key><string>__PROJECT_ROOT__</string>
+  <key>StandardOutPath</key><string>__PROJECT_ROOT__/logs/launchd.out.log</string>
+  <key>StandardErrorPath</key><string>__PROJECT_ROOT__/logs/launchd.err.log</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key><string>/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+</dict>
+</plist>

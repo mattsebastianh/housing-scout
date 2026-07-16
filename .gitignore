@@ -1,0 +1,55 @@
+# Private backup (shadow git-dir pushing personal files to a separate private repo)
+.git-private/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Data
+data/chalet.db
+data/chalet.db-journal
+data/chalet.db-wal
+data/chalet.db-shm
+data/scout.db
+data/scout.db-journal
+data/scout.db-wal
+data/scout.db-shm
+data/reports/*.md
+data/reports/*.FAILED.md
+!data/reports/.gitkeep
+
+# Logs
+logs/*.log
+!logs/.gitkeep
+
+# OS
+.DS_Store
+
+# Editors / note vaults
+.obsidian/
+
+# Claude Code local settings + private project memory
+.claude/settings.local.json
+.claude/memory/
+data/telegram_listener.offset
+data/run.lock
+
+# Personal profile (search criteria, buyer preferences)
+profile.yaml
+agent_instructions/*.local.md
+
+# Local-only working docs (never committed — may hold personal context)
+CLAUDE.md
+MEMORY.md
+*.local.md
+.superpowers/
