@@ -91,6 +91,9 @@ Log: logs/run-YYYY-MM-DD.log
 
 # Alternate config / profile files
 .venv/bin/python run_daily.py --config path/to/config.yaml --profile path/to/profile.yaml
+
+# Test the scraper alone — prints listings, no DB write
+.venv/bin/python scripts/manual_scrape.py [--city <city>]
 ```
 
 Each run, per city:
@@ -109,6 +112,8 @@ The AI system prompts are committed, editable Markdown templates in `agent_instr
 
 - `property_analyst.md` — the per-listing analyst prompt
 - `chat_agent.md` — the Telegram conversational agent prompt
+
+English is the default; Spanish versions (`property_analyst.es.md`, `chat_agent.es.md`) ship alongside as ready-made alternatives — they are not loaded automatically, so to use one copy it over the default file or into a `.local.md` override.
 
 The templates use placeholders filled at runtime from your `profile.yaml`, so no personal data lives in them: `property_analyst.md` uses all seven — `{cities}`, `{price_min}`, `{price_max}`, `{property_type}`, `{preferred_plot_m2}`, `{buyer_profile}`, `{response_language}` — while `chat_agent.md` uses five (all except `{property_type}` and `{preferred_plot_m2}`).
 
@@ -144,6 +149,12 @@ Install the always-on listener (launchd, KeepAlive — restarts automatically):
 
 ```bash
 bash scripts/install_listener.sh
+```
+
+To uninstall:
+```bash
+launchctl bootout "gui/$(id -u)/com.housing-scout.listener"
+rm ~/Library/LaunchAgents/com.housing-scout.listener.plist
 ```
 
 The listener acknowledges each `/scout`, runs the normal pipeline (`run_daily.py --city …`), and the results arrive as the usual Telegram cards + report. A shared lock ensures a manual run and the scheduled run never overlap.
