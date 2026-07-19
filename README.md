@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](pyproject.toml)
-[![Version](https://img.shields.io/badge/version-3.0.1-informational.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.0-informational.svg)](CHANGELOG.md)
 
 A reusable, profile-driven **property-scouting agent template**. It scrapes a real-estate portal on a schedule (and on demand from Telegram), enriches every listing with public data, scores it across 8 dimensions, runs an AI analyst on each new listing, and delivers the results as Telegram property cards plus a ranked Markdown report — one independent pipeline per target city.
 

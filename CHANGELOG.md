@@ -7,14 +7,12 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
-- Gitignore `.git-private/` (shadow repo used for personal file backups)
-- Docs: use `python -m pytest` consistently in README and ARCHITECTURE
-- Privacy: gitignore + untrack `CLAUDE.md` and `.claude/memory/`
-- Docs: correct ROADMAP staleness found in documentation audit
+_Nothing yet._
 
-## [3.0.0] - 2026-07-15
+## [3.0.0] - 2026-07-18
 
 Rebrand and provider-agnostic refactor: `chalet` → `property-scout` → `housing-scout`.
+Published as a fresh squashed snapshot — the root of public history.
 
 - Split package into `scout/core/` (country/portal-agnostic) and `scout/providers/es/`
   (Spain / Idealista reference implementation), joined by a provider registry
@@ -26,6 +24,14 @@ Rebrand and provider-agnostic refactor: `chalet` → `property-scout` → `housi
 - Added `MEMORY.md` cross-session project memory conventions (later moved to
   `.claude/memory/`, gitignored)
 - Replaced hardcoded profile/branding/country literals with config-driven values
+- Made English the default agent-instruction language; Spanish templates kept
+  alongside as `*.es.md` backups (not loaded automatically)
+- Docs housekeeping: documented the Spanish prompt templates and the `/scout`
+  listener uninstall in README, surfaced `scripts/manual_scrape.py`, used
+  `python -m pytest` consistently, corrected ROADMAP staleness, added this
+  `CHANGELOG.md` summarizing v1.0.0 onward
+- Gitignored generated graphify knowledge-graph artifacts (`/graphify*`) and
+  `.git-private/`; untracked `CLAUDE.md` and `.claude/memory/` (privacy)
 
 ## [2.0.0] - 2026-07-13
 
