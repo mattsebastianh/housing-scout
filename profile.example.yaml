@@ -1,0 +1,21 @@
+# Personal profile — copy to profile.yaml (gitignored) or run: python -m scout setup
+country: es
+portal: idealista
+search:
+  cities:
+    - {name: your-city, lat: 0.0, lon: 0.0, radius_km: 30}
+  price_min_eur: 100000
+  price_max_eur: 200000
+  property_type: chalet_independiente
+  preferred_plot_m2: 1000
+buyer:
+  household: "describe your household"
+  purpose: primary_residence
+  top_priorities: [urban_commute, residential_character, plot_usability]
+  investment_angle: true
+  investment_notes: "seasonal rental / room rental viability"
+  must_haves: ["grid electricity, mains water, sewage, paved access"]
+  deal_breakers: ["attached / semi-detached"]
+  response_language: es
+  extra_notes: |
+    Anything else the AI analyst should know about your priorities.

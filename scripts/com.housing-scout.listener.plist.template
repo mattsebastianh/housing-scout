@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.housing-scout.listener</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>__PROJECT_ROOT__/.venv/bin/python</string>
+    <string>__PROJECT_ROOT__/run_listener.py</string>
+  </array>
+  <!-- Long-running Telegram /scout listener. KeepAlive relaunches it if it
+       exits; ThrottleInterval stops a crash loop from hammering the API. -->
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>ThrottleInterval</key><integer>30</integer>
+  <key>WorkingDirectory</key><string>__PROJECT_ROOT__</string>
+  <key>StandardOutPath</key><string>__PROJECT_ROOT__/logs/listener.out.log</string>
+  <key>StandardErrorPath</key><string>__PROJECT_ROOT__/logs/listener.err.log</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key><string>/usr/local/bin:/usr/bin:/bin</string>
+  </dict>
+</dict>
+</plist>

@@ -1,0 +1,35 @@
+scrape:
+  provider: brightdata  # brightdata = collector API (free tier); scrapeops = HTML proxy fallback
+  # brightdata_collector_id: set via the BRIGHTDATA_COLLECTOR_ID env var (.env),
+  # or uncomment here — your collector's ID from Bright Data Scraper Studio (c_xxx…).
+  pages: 1              # pages to fetch per city (1 page ≈ 25–30 listings)
+  delay_ms: 3000
+  fetch_details: false  # detail-page fetch for bathrooms disabled to save ScrapeOps credits
+  details_limit: 5      # (only used when fetch_details is true) top-N listings to detail-fetch
+
+report:
+  language: es
+  top_n: 10
+  output_dir: data/reports
+  timezone: Europe/Madrid
+  app_name: Housing Scout
+
+scoring:
+  weights:
+    price: 0.18
+    location: 0.20
+    commute: 0.15
+    legal: 0.15
+    regulatory: 0.07
+    environmental: 0.10
+    neighbourhood: 0.10
+    infrastructure: 0.05
+
+run:
+  # Weekly — Tuesday at 00:00 CET / Europe/Madrid (intent).
+  # The real schedule lives in scripts/com.housing-scout.daily.plist.template;
+  # launchd uses the Mac's local time (00:00 Tuesday CET == 18:00 Monday local UTC-5).
+  # In summer CEST (UTC+2) this fires at 01:00 Tuesday Madrid; bump Hour to 17
+  # in the plist to stay at exactly 00:00 year-round.
+  hour: 0
+  minute: 0
